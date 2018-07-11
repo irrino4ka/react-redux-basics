@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actionTypes from '../../store/actions';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
@@ -9,22 +10,22 @@ class Counter extends Component {
         counter: 0
     }
 
-    counterChangedHandler = ( action, value ) => {
-        switch ( action ) {
-            case 'inc':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + 1 } } )
-                break;
-            case 'dec':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - 1 } } )
-                break;
-            case 'add':
-                this.setState( ( prevState ) => { return { counter: prevState.counter + value } } )
-                break;
-            case 'sub':
-                this.setState( ( prevState ) => { return { counter: prevState.counter - value } } )
-                break;
-        }
-    }
+    // counterChangedHandler = ( action, value ) => {
+    //     switch ( action ) {
+    //         case 'inc':
+    //             this.setState( ( prevState ) => { return { counter: prevState.counter + 1 } } )
+    //             break;
+    //         case 'dec':
+    //             this.setState( ( prevState ) => { return { counter: prevState.counter - 1 } } )
+    //             break;
+    //         case 'add':
+    //             this.setState( ( prevState ) => { return { counter: prevState.counter + value } } )
+    //             break;
+    //         case 'sub':
+    //             this.setState( ( prevState ) => { return { counter: prevState.counter - value } } )
+    //             break;
+    //     }
+    // }
 
     render () {
         return (
@@ -58,12 +59,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCount: () => dispatch({type: 'INCREMENT'}),
-        onDecrementCount: () => dispatch({type: 'DECREMENT'}),
-        onIncrement5: () => dispatch({type: 'INCREMENT', value: 5}),
-        onDecrement5: () => dispatch({type: 'DECREMENT', value: 23}),
-        onStoreResult: () => dispatch({type: 'STORE_RESULT'}),
-        onDeleteResult: (id) => dispatch({type: 'DELETE_RESULT', resId: id}),
+        onIncrementCount: () => dispatch({type: actionTypes.INCREMENT}),
+        onDecrementCount: () => dispatch({type: actionTypes.DECREMENT}),
+        onIncrement5: () => dispatch({type: actionTypes.INCREMENT, value: 5}),
+        onDecrement5: () => dispatch({type: actionTypes.DECREMENT, value: 23}),
+        onStoreResult: () => dispatch({type: actionTypes.STORE_RESULT}),
+        onDeleteResult: (id) => dispatch({type: actionTypes.DELETE_RESULT, resId: id}),
     }    
 }
 
