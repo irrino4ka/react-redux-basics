@@ -6,25 +6,8 @@ import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 
 class Counter extends Component {
-    state = {
-        counter: 0
-    }
-
-    // counterChangedHandler = ( action, value ) => {
-    //     switch ( action ) {
-    //         case 'inc':
-    //             this.setState( ( prevState ) => { return { counter: prevState.counter + 1 } } )
-    //             break;
-    //         case 'dec':
-    //             this.setState( ( prevState ) => { return { counter: prevState.counter - 1 } } )
-    //             break;
-    //         case 'add':
-    //             this.setState( ( prevState ) => { return { counter: prevState.counter + value } } )
-    //             break;
-    //         case 'sub':
-    //             this.setState( ( prevState ) => { return { counter: prevState.counter - value } } )
-    //             break;
-    //     }
+    // state = {
+    //     counter: 0
     // }
 
     render () {
@@ -36,7 +19,7 @@ class Counter extends Component {
                 <CounterControl label="Add 5" clicked={this.props.onIncrement5}  />
                 <CounterControl label="Subtract 23" clicked={this.props.onDecrement5}  />
                 <hr/>
-                <button onClick={this.props.onStoreResult}>Store Result</button>
+                <button onClick={() => this.props.onStoreResult(this.props.count)}>Store Result</button>
                 <ul>
                     {this.props.storedResults.map(result => (
                         <li key={result.id} 
@@ -52,8 +35,8 @@ class Counter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        count: state.counter,
-        storedResults: state.results
+        count: state.counter.counter,
+        storedResults: state.result.results
     };
 };
 
@@ -63,7 +46,7 @@ const mapDispatchToProps = dispatch => {
         onDecrementCount: () => dispatch({type: actionTypes.DECREMENT}),
         onIncrement5: () => dispatch({type: actionTypes.INCREMENT, value: 5}),
         onDecrement5: () => dispatch({type: actionTypes.DECREMENT, value: 23}),
-        onStoreResult: () => dispatch({type: actionTypes.STORE_RESULT}),
+        onStoreResult: (result) => dispatch({type: actionTypes.STORE_RESULT, result: result}),
         onDeleteResult: (id) => dispatch({type: actionTypes.DELETE_RESULT, resId: id}),
     }    
 }
